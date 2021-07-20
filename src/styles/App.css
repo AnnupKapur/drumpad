@@ -19,6 +19,17 @@
 	position: relative;
 }
 
+@media screen and (max-width: 1000px){
+	.drum-pad-container{
+		width: auto;
+	
+		display: flex;
+		flex-direction: column-reverse;
+	
+		position: relative;
+	}
+}
+
 .pad{
 	display: grid;
 	grid-template-columns: auto auto auto;
@@ -66,7 +77,8 @@
 
 .screen-sound{
 	height:1em;
-	width: 5em;
+	display: block;
+	min-width: 5em;
 	background-color: rgba(0, 240, 197, 0.5);
 	padding:1em 2em 1em 2em;
 

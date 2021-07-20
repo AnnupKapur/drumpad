@@ -165,14 +165,6 @@ function App() {
     }
   )
 
-
-/* -----------------------------------
-  STATE: POWER STATE
------------------------------------ */
-
-  const [powerState, setPowerState] = useState(true);
-
-
 /* -----------------------------------
   STATE: VOLUME
  ----------------------------------- */
@@ -213,15 +205,6 @@ function App() {
         setSoundPack('A');
         break;
     }
-  }
-
-
-/* -----------------------------------
-  CHANGE: POWER ON/OFF
------------------------------------ */
-
-  const powerToggle = () => {
-    setPowerState(!powerState);
   }
 
 
@@ -270,15 +253,14 @@ function App() {
 
   document.onkeydown = (event) => {
     var name = event.key;
-    var code = event.code;
 
     const f = selectPack(soundPack).find(
-      ({keyTrigger}) => keyTrigger == name.toUpperCase()
+      ({keyTrigger}) => keyTrigger === name.toUpperCase()
     );
     
     console.log(f);
 
-    if(f==undefined){
+    if(f===undefined){
     }else{
       //Set current sound as state
       setSound({

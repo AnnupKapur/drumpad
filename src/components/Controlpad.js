@@ -18,7 +18,7 @@ const Controlpad = ({soundPlaying, packPlaying, packReference, volume, volumeCha
 
 	//function switch
 	const volIcon = () => {
-		if(volume==0){
+		if(volume===0){
 			return <FontAwesomeIcon icon={faVolumeMute} />;
 		} else if(volume>0 && volume<20){
 			return <FontAwesomeIcon icon={faVolumeOff} />;
