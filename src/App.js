@@ -238,7 +238,7 @@ function App() {
 
 
 /* -----------------------------------
-  OUTPUT : PLAY SOUND
+  OUTPUT : PLAY SOUND ON-SCREEN CLICK
 ----------------------------------- */
 
   const playSound = (evt) => {
@@ -264,6 +264,34 @@ function App() {
   }
 
 
+/* -----------------------------------
+  OUTPUT : PLAY SOUND KEYBOARD PRESS
+----------------------------------- */
+
+  document.onkeydown = (event) => {
+    var name = event.key;
+    var code = event.code;
+
+    const f = selectPack(soundPack).find(
+      ({keyTrigger}) => keyTrigger == name.toUpperCase()
+    );
+    
+    console.log(f);
+
+    if(f==undefined){
+    }else{
+      //Set current sound as state
+      setSound({
+        soundPack:soundPack,
+        keyCode:event.keyCode
+      })
+
+      // Create and deploy audio object
+      var audio = new Audio(f.url);
+      audio.volume = volume/100;
+      audio.play();
+    }
+  };
 
 
   
@@ -283,49 +311,55 @@ function App() {
   }
 
 
+  
+
+
 
 
 
   return (
     <div className="App">
-      <Soundpad pack={selectPack(sound.soundPack)} play={playSound} />
       
+      <h1>Drum Machine</h1>
+
+      <div className="drum-pad-container" id="drum-machine">
+
+        <Soundpad pack={selectPack(sound.soundPack)} play={playSound} />
 
 
+        {/* 
+        Controlpad component variables reference:
+          
+          :OBJECT: CURRENT SOUND PLAYING
+            soundPlaying={sound}
 
+          :ARRAY: CURRENT SOUND PACK SELECTED
+            packPlaying={selectPack(sound.soundPack)} 
+          
+          :ARRAY: ALL PACKS REFERENCE FOR PACK NAME
+            packReference={allSoundPacks}
+          
+          :INTEGER: CURRENT VOLUME
+            volume={volume}
 
-      {/* 
-      Controlpad component variables reference:
+          :FUNCTION: CHANGE VOLUME
+            volumeChange={volumeChange}
+          
+          :FUNCTION: CHANGE PACK
+            packChoose={toggleSoundPack}
+
+        */}
         
-        :OBJECT: CURRENT SOUND PLAYING
+        <Controlpad
           soundPlaying={sound}
-
-        :ARRAY: CURRENT SOUND PACK SELECTED
           packPlaying={selectPack(sound.soundPack)} 
-        
-        :ARRAY: ALL PACKS REFERENCE FOR PACK NAME
           packReference={allSoundPacks}
-        
-        :INTEGER: CURRENT VOLUME
           volume={volume}
-
-        :FUNCTION: CHANGE VOLUME
           volumeChange={volumeChange}
-        
-        :FUNCTION: CHANGE PACK
           packChoose={toggleSoundPack}
-
-      */}
-      
-      <Controlpad
-        soundPlaying={sound}
-        packPlaying={selectPack(sound.soundPack)} 
-        packReference={allSoundPacks}
-        volume={volume}
-        volumeChange={volumeChange}
-        packChoose={toggleSoundPack}
-        />
-
+          />
+          
+      </div>
 
 
 
